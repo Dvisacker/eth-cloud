@@ -20,3 +20,13 @@ terraform apply
 journalctl -f -u reth
 journalctl -f -u lighthouse
 ```
+
+## References
+- https://gist.github.com/yorickdowne/f3a3e79a573bf35767cd002cc977b038
+- https://pawelurbanek.com/ethereum-node-aws
+
+## Todo
+- [x] AWS: reth configuration
+- [ ] AWS: geth configuration
+- [ ] Hetzner: reth configuration
+- [ ] Hetzner: geth configuration
