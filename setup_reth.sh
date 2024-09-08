@@ -13,6 +13,7 @@ sudo ufw allow 30303 # P2P
 sudo ufw allow 9000 # Lighthouse P2P
 sudo ufw allow 80 # HTTP
 sudo ufw allow 443 # HTTPS
+sudo ufw allow 9001 # Metrics
 sudo ufw enable
 
 sudo ufw status verbose

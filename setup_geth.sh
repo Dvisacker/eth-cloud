@@ -39,3 +39,9 @@ sudo systemctl enable geth
 sudo systemctl start geth
 
 echo "Geth installation and configuration completed"
+
+
+
+# /usr/bin/geth --metrics --metrics.influxdb --metrics.influxdb.endpoint http://0.0.0.0:8086 --metrics.influxdb.username geth --metrics.influxdb.password hunter2 --http --datadir /opt/geth/mainnet --cache 2048
+
+# ExecStart=/usr/bin/geth --goerli --syncmode "fast" --cache 4096 --maxpeers 50
