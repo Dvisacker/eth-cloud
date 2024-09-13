@@ -1,17 +1,23 @@
 variable "namespace" {
   type = string
+  default = "hetzner-reth-op"
+}
+
+variable "hcloud_token" {
+  type = string
 }
 
 packer {
   required_plugins {
     hcloud = {
-      source  = "github.com/hetznercloud/hcloud"
       version = ">= 1.2.0"
+      source  = "github.com/hetznercloud/hcloud"
     }
   }
 }
 
 source "hcloud" "base-amd64" {
+  token         = "${var.hcloud_token}"
   image         = "ubuntu-22.04"
   location      = "hel1"
   server_type   = "cx11"
@@ -27,6 +33,6 @@ source "hcloud" "base-amd64" {
 build {
   sources = ["source.hcloud.base-amd64"]
   provisioner "shell" {
-    script = "../setup.sh"
+    script = "../setups/setup_op_reth_ubuntu_docker.sh"
   }
 }

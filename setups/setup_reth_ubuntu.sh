@@ -47,8 +47,8 @@ WantedBy=multi-user.target
 EOF
 EOF2
 
-# sudo systemctl enable reth
-# sudo systemctl start reth
+sudo systemctl enable reth
+sudo systemctl start reth
 
 echo "Install lighthouse"
 
@@ -78,5 +78,5 @@ WantedBy=multi-user.target
 EOF
 EOF2
 
-# sudo systemctl enable lighthouse
-# sudo systemctl start lighthouse
+sudo systemctl enable lighthouse
+sudo systemctl start lighthouse

@@ -35,6 +35,6 @@ build {
   ]
 
   provisioner "shell" {
-    script = "../setup_op_reth_ubuntu.sh"
+    script = "../setups/setup_op_reth_ubuntu_docker.sh"
   }
 }

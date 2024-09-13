@@ -3,10 +3,12 @@ variable "hcloud_token" {
   sensitive   = true
 }
 
-variable "hcloud_ssh_key" {
-  description = "SSH Key"
+variable "ssh_key_fingerprint" {
+  description = "SSH key fingerprint"
 }
 
 variable "namespace" {
   description = "Namespace"
+  default = "hetzner-reth-op"
 }
+

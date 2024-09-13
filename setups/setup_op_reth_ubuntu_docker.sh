@@ -43,11 +43,14 @@ sudo netstat -tlnp
 echo "Install op-reth"
 
 # Install op-reth
-RETH_VERSION="v1.0.6"
+RETH_VERSION="v1.0.3"
 wget "https://github.com/paradigmxyz/reth/releases/download/${RETH_VERSION}/op-reth-${RETH_VERSION}-x86_64-unknown-linux-gnu.tar.gz"
 tar zxvf "op-reth-${RETH_VERSION}-x86_64-unknown-linux-gnu.tar.gz"
 rm "op-reth-${RETH_VERSION}-x86_64-unknown-linux-gnu.tar.gz"
 sudo mv op-reth /usr/local/bin/
+
+# Install TMUX
+sudo apt-get install -y tmux
 
 # Generate JWT secret
 sudo mkdir -p /root/.ethereum
@@ -64,14 +67,16 @@ Wants=network-online.target
 [Service]
 User=root
 ExecStart=/usr/local/bin/op-reth node \
+--full \
     --chain base \
     --rollup.sequencer-http https://mainnet-sequencer.base.org \
     --http \
+    --http.api all \
     --ws \
+    --ws.api all \
     --authrpc.jwtsecret /root/.ethereum/jwt.hex \
     --authrpc.port 9551 \
-    --metrics 127.0.0.1:9001 \
-    -vvvv
+    --metrics 127.0.0.1:9001
 Restart=always
 RestartSec=5s
 
@@ -96,7 +101,6 @@ ExecStart=/usr/bin/docker run --rm --name op-node \
     -v /root/.ethereum:/root/.ethereum:ro \
     -p 9004:9004/tcp \
     -p 9004:9004/udp \
-    --network host \
     us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:latest \
     op-node \
     --network=base-mainnet \
@@ -122,21 +126,3 @@ sudo systemctl enable op-reth op-node-docker
 sudo systemctl start op-reth op-node-docker
 
 echo "Optimism node setup complete. Check the logs with 'journalctl -u op-reth -f' and 'journalctl -u op-node-docker -f'"
-
-
-/usr/bin/docker run --rm --name op-node \
-    -v /root/.ethereum:/root/.ethereum:ro \
-    -p 9004:9004/tcp \
-    -p 9004:9004/udp \
-    us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:latest \
-    op-node \
-    --network=base-mainnet \
-    --syncmode=execution-layer \
-    --l1=wss://eth.merkle.io \
-    --l1.trustrpc \
-    --l1.beacon=https://ethereum-beacon-api.publicnode.com \
-    --l2=http://0.0.0.0:9551 \
-    --l2.jwt-secret=/root/.ethereum/jwt.hex \
-    --l2.enginekind=reth \
-    --p2p.listen.tcp=9004 \
-    --p2p.listen.udp=9004

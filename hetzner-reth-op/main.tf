@@ -3,19 +3,28 @@ data "hcloud_image" "this" {
   most_recent = true
 }
 
+data "hcloud_ssh_key" "this" {
+  fingerprint = var.ssh_key_fingerprint
+}
+
 resource "hcloud_server" "this" {
   name        = "${var.namespace}-server"
   image       = data.hcloud_image.this.id
-  server_type = "cx41"
-  location    = "hel1"
+  server_type = "ccx33"
+  location    = "ash"
   public_net {
     ipv4_enabled = true
     ipv6_enabled = true
   }
   ssh_keys = [
-    var.hcloud_ssh_key,
+    data.hcloud_ssh_key.this.id,
   ]
 }
+
+# resource "hcloud_ssh_key" "this" {
+#   name = "${var.namespace}-ssh-key"
+#   public_key = file("~/.ssh/id_rsa.pub")
+# }
 
 resource "hcloud_volume" "this" {
   name      = "${var.namespace}-volume"
