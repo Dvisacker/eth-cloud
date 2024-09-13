@@ -33,7 +33,7 @@ resource "aws_instance" "this" {
     # https://paradigmxyz.github.io/reth/run/pruning.html
     # https://ycharts.com/indicators/ethereum_chain_full_sync_data_size
     # https://gist.github.com/yorickdowne/f3a3e79a573bf35767cd002cc977b038
-    volume_size = 1500
+    volume_size = 2000 
     volume_type = "gp3"
     iops = 15000
   }

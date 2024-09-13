@@ -26,7 +26,7 @@ journalctl -f -u lighthouse
 - https://pawelurbanek.com/ethereum-node-aws
 
 ## Tips
-- For AWS, provision 16k IOPS for syncing then drop down to 8000
+- For AWS, provision 16k IOPS for syncing then drop down to 8k
 - The node occasionally needs a restart: `sudo systemctl restart reth`
 - Hetzner is much cheaper than AWS (4 times cheaper for compute, 1.5 cheaper for storage)
 

@@ -1,6 +1,6 @@
 variable "namespace" {
   type = string
-  default = "dev"
+  default = "aws-reth-op"
 }
 
 packer {
@@ -13,7 +13,7 @@ packer {
 }
 
 source "amazon-ebs" "ubuntu" {
-  ami_name      = "${var.namespace}-ami"
+  ami_name      = "${var.namespace}-ami"sd
   instance_type = "c5.xlarge"
   region        = "us-east-1"
   source_ami_filter {
@@ -35,6 +35,6 @@ build {
   ]
 
   provisioner "shell" {
-    script = "../setup_reth.sh"
+    script = "../setup_op_reth_ubuntu.sh"
   }
 }

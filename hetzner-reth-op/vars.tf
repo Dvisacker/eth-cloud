@@ -1,5 +1,5 @@
 variable "hcloud_token" {
-  description = "Hetzener API token"
+  description = "Hetzner API token"
   sensitive   = true
 }
 
