@@ -75,6 +75,7 @@ ExecStart=/usr/local/bin/op-reth node \
     --ws \
     --ws.api all \
     --authrpc.jwtsecret /root/.ethereum/jwt.hex \
+    --authrpc.addr 127.0.0.0 \
     --authrpc.port 9551 \
     --metrics 127.0.0.1:9001
 Restart=always
@@ -108,7 +109,7 @@ ExecStart=/usr/bin/docker run --rm --name op-node \
     --l1=wss://eth.merkle.io \
     --l1.trustrpc \
     --l1.beacon=https://ethereum-beacon-api.publicnode.com \
-    --l2=http://0.0.0.0:9551 \
+    --l2=http://127.0.0.0:9551 \
     --l2.jwt-secret=/root/.ethereum/jwt.hex \
     --l2.enginekind=reth \
     --p2p.listen.tcp=9004 \
