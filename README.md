@@ -1,3 +1,4 @@
+## Very outdated docs
 
 ## Setup
 
@@ -7,12 +8,6 @@ packer build .
 terraform init
 terraform apply
 ```
-
-### Hetzner
-
-1. Create a project
-2. [Generate an API key](https://docs.hetzner.com/cloud/api/getting-started/generating-api-token/) and add it to `terraform.tfvars`
-3. [Add a SSH key](https://community.hetzner.com/tutorials/add-ssh-key-to-your-hetzner-cloud)
 
 ## Logs
 
@@ -26,8 +21,6 @@ journalctl -f -u lighthouse
 - https://pawelurbanek.com/ethereum-node-aws
 
 ## Tips
-- For AWS, provision 16k IOPS for syncing then drop down to 8k
-- The node occasionally needs a restart: `sudo systemctl restart reth`
 - Hetzner is much cheaper than AWS (4 times cheaper for compute, 1.5 cheaper for storage)
 
 ## Todo
