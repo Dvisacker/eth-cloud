@@ -128,7 +128,7 @@ sudo systemctl start op-reth op-node-docker
 echo "Optimism node setup complete. Check the logs with 'journalctl -u op-reth -f' and 'journalctl -u op-node-docker -f'"
 
 # Add tmux session for log tailing
-cat << EOF > /home/$USER/start_log_session.sh
+cat << EOF > /usr/local/bin/start_log_session
 #!/bin/bash
 tmux new-session -d -s op_logs
 tmux split-window -h
@@ -139,6 +139,6 @@ tmux send-keys "journalctl -u op-node-docker -f" C-m
 tmux attach-session -t op_logs
 EOF
 
-chmod +x /home/$USER/start_log_session.sh
+chmod +x /usr/local/bin/start_log_session
 
-echo "To view logs in tmux, run: ./start_log_session.sh"
+echo "To view logs in tmux, run: sudo start_log_session"
