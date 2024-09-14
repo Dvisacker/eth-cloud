@@ -1,6 +1,6 @@
 variable "namespace" {
   type = string
-  default = "hetzner-reth-op"
+  default = "hetzner-reth-optimism"
 }
 
 variable "hcloud_token" {
@@ -33,6 +33,6 @@ source "hcloud" "base-amd64" {
 build {
   sources = ["source.hcloud.base-amd64"]
   provisioner "shell" {
-    script = "../setups/setup_op_reth_ubuntu_docker.sh"
+    script = "../setups/setup_optimism_reth.sh"
   }
 }

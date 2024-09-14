@@ -9,6 +9,6 @@ variable "ssh_key_fingerprint" {
 
 variable "namespace" {
   description = "Namespace"
-  default = "hetzner-reth-op"
+  default = "hetzner-reth-base"
 }
 
