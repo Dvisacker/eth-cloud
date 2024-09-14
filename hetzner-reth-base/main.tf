@@ -23,7 +23,7 @@ resource "hcloud_server" "this" {
 
 resource "hcloud_volume" "this" {
   name      = "${var.namespace}-volume"
-  size      = 100 # 1400 https://ycharts.com/indicators/ethereum_chain_full_sync_data_size
+  size      = 1000 # 1400 https://ycharts.com/indicators/ethereum_chain_full_sync_data_size
   server_id = hcloud_server.this.id
   automount = true
   format    = "ext4"
