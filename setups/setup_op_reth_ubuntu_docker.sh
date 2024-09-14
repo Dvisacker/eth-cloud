@@ -100,8 +100,7 @@ ExecStartPre=-/usr/bin/docker stop op-node
 ExecStartPre=-/usr/bin/docker rm op-node
 ExecStart=/usr/bin/docker run --rm --name op-node \
     -v /root/.ethereum:/root/.ethereum:ro \
-    -p 9004:9004/tcp \
-    -p 9004:9004/udp \
+    --network host \
     us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:latest \
     op-node \
     --network=base-mainnet \
@@ -127,3 +126,19 @@ sudo systemctl enable op-reth op-node-docker
 sudo systemctl start op-reth op-node-docker
 
 echo "Optimism node setup complete. Check the logs with 'journalctl -u op-reth -f' and 'journalctl -u op-node-docker -f'"
+
+# Add tmux session for log tailing
+cat << EOF > /home/$USER/start_log_session.sh
+#!/bin/bash
+tmux new-session -d -s op_logs
+tmux split-window -h
+tmux select-pane -t 0
+tmux send-keys "journalctl -u op-reth -f" C-m
+tmux select-pane -t 1
+tmux send-keys "journalctl -u op-node-docker -f" C-m
+tmux attach-session -t op_logs
+EOF
+
+chmod +x /home/$USER/start_log_session.sh
+
+echo "To view logs in tmux, run: ./start_log_session.sh"
